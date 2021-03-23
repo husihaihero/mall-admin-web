@@ -36,6 +36,134 @@ export const constantRouterMap = [
 
 export const asyncRouterMap = [
   {
+    path: '/mallManage/customer',
+    component: Layout,
+    redirect: '/mallManage/customer',
+    name: 'customer',
+    meta: {title: '客户管理', icon: 'product'},
+    children: [
+      {
+        path: 'customerList',
+        name: 'customerList',
+        component: () => import('@/views/mallManage/customer/index'),
+        meta: {title: '客户列表', icon: 'product-list'}
+      },
+      {
+        path: 'customerDetail',
+        name: 'customerDetail',
+        component: () => import('@/views/mallManage/customer/customerDetail'),
+        meta: {title: '客户详情', icon: 'product-add'}
+      }
+    ]
+  },
+  {
+    path: '/mallManage/order',
+    component: Layout,
+    redirect: '/mallManage/order',
+    name: 'order',
+    meta: {title: '订单管理', icon: 'product'},
+    children: [
+      {
+        path: 'ordinaryOrderList',
+        name: 'ordinaryOrderList',
+        component: () => import('@/views/mallManage/order/ordinaryOrder/index'),
+        meta: {title: '普通订单', icon: 'product-list'}
+      },
+      {
+        path: 'specialOrderList',
+        name: 'specialOrderList',
+        component: () => import('@/views/mallManage/order/specialOrder/index'),
+        meta: {title: '非标订单', icon: 'product-list'}
+      },
+      {
+        path: 'payCheck',
+        name: 'payCheck',
+        component: () => import('@/views/mallManage/order/payCheck/index'),
+        meta: {title: '支付审核', icon: 'product-add'}
+      },
+      {
+        path: 'invoiceList',
+        name: 'invoiceList',
+        component: () => import('@/views/mallManage/order/invoice/index'),
+        meta: {title: '开票管理', icon: 'product-add'}
+      },
+      {
+        path: 'qualityTestingList',
+        name: 'qualityTestingList',
+        component: () => import('@/views/mallManage/order/qualityTestingManage/index'),
+        meta: {title: '质检管理', icon: 'product-add'}
+      }
+    ]
+  },
+  {
+    path:'/ums',
+    component: Layout,
+    redirect: '/ums/admin',
+    name: 'ums',
+    meta: {title: '用户管理', icon: 'ums'},
+    children: [
+      {
+        path: 'admin',
+        name: 'admin',
+        component: () => import('@/views/ums/admin/index'),
+        meta: {title: '用户列表', icon: 'ums-admin'}
+      },
+      {
+        path: 'role',
+        name: 'role',
+        component: () => import('@/views/ums/role/index'),
+        meta: {title: '角色列表', icon: 'ums-role'}
+      },
+      {
+        path: 'allocMenu',
+        name: 'allocMenu',
+        component: () => import('@/views/ums/role/allocMenu'),
+        meta: {title: '分配菜单'},
+        hidden: true
+      },
+      {
+        path: 'allocResource',
+        name: 'allocResource',
+        component: () => import('@/views/ums/role/allocResource'),
+        meta: {title: '分配资源'},
+        hidden: true
+      },
+      {
+        path: 'menu',
+        name: 'menu',
+        component: () => import('@/views/ums/menu/index'),
+        meta: {title: '菜单列表', icon: 'ums-menu'}
+      },
+      {
+        path: 'addMenu',
+        name: 'addMenu',
+        component: () => import('@/views/ums/menu/add'),
+        meta: {title: '添加菜单'},
+        hidden: true
+      },
+      {
+        path: 'updateMenu',
+        name: 'updateMenu',
+        component: () => import('@/views/ums/menu/update'),
+        meta: {title: '修改菜单'},
+        hidden: true
+      },
+      {
+        path: 'resource',
+        name: 'resource',
+        component: () => import('@/views/ums/resource/index'),
+        meta: {title: '资源列表', icon: 'ums-resource'}
+      },
+      {
+        path: 'resourceCategory',
+        name: 'resourceCategory',
+        component: () => import('@/views/ums/resource/categoryList'),
+        meta: {title: '资源分类'},
+        hidden: true
+      }
+    ]
+  },
+  {
     path: '/pms',
     component: Layout,
     redirect: '/pms/product',
@@ -290,74 +418,6 @@ export const asyncRouterMap = [
       }
     ]
   },
-  {
-    path:'/ums',
-    component: Layout,
-    redirect: '/ums/admin',
-    name: 'ums',
-    meta: {title: '权限', icon: 'ums'},
-    children: [
-      {
-        path: 'admin',
-        name: 'admin',
-        component: () => import('@/views/ums/admin/index'),
-        meta: {title: '用户列表', icon: 'ums-admin'}
-      },
-      {
-        path: 'role',
-        name: 'role',
-        component: () => import('@/views/ums/role/index'),
-        meta: {title: '角色列表', icon: 'ums-role'}
-      },
-      {
-        path: 'allocMenu',
-        name: 'allocMenu',
-        component: () => import('@/views/ums/role/allocMenu'),
-        meta: {title: '分配菜单'},
-        hidden: true
-      },
-      {
-        path: 'allocResource',
-        name: 'allocResource',
-        component: () => import('@/views/ums/role/allocResource'),
-        meta: {title: '分配资源'},
-        hidden: true
-      },
-      {
-        path: 'menu',
-        name: 'menu',
-        component: () => import('@/views/ums/menu/index'),
-        meta: {title: '菜单列表', icon: 'ums-menu'}
-      },
-      {
-        path: 'addMenu',
-        name: 'addMenu',
-        component: () => import('@/views/ums/menu/add'),
-        meta: {title: '添加菜单'},
-        hidden: true
-      },
-      {
-        path: 'updateMenu',
-        name: 'updateMenu',
-        component: () => import('@/views/ums/menu/update'),
-        meta: {title: '修改菜单'},
-        hidden: true
-      },
-      {
-        path: 'resource',
-        name: 'resource',
-        component: () => import('@/views/ums/resource/index'),
-        meta: {title: '资源列表', icon: 'ums-resource'}
-      },
-      {
-        path: 'resourceCategory',
-        name: 'resourceCategory',
-        component: () => import('@/views/ums/resource/categoryList'),
-        meta: {title: '资源分类'},
-        hidden: true
-      }
-    ]
-  },
   {path: '*', redirect: '/404', hidden: true}
 ]
 
@@ -366,4 +426,3 @@ export default new Router({
   scrollBehavior: () => ({y: 0}),
   routes: constantRouterMap
 })
-
