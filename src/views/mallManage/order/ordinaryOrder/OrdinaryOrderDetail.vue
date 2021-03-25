@@ -117,7 +117,7 @@
                 </el-row>
                 <el-row>
                     <el-col :span="4">
-                        <img src='../../../../assets/img/img.jpg' style='width:90px;height: 90px;' alt='商品图片'/>
+                        <img src='' style='width:90px;height: 90px;' alt='商品图片'/>
                     </el-col>
                     <el-col :span="7" style='margin-top: 30px'>
                         <b>U形螺栓JB/ZQ 1234- -2000 108粗牙/黄锌</b>

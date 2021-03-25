@@ -1,44 +1,57 @@
-<!--质检管理中订单详情页-->
 <template>
     <el-container>
-        <el-header height='22%'>
+        <el-header height='30%'>
             <el-breadcrumb separator="/">
                 <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                <el-breadcrumb-item><a href="">订单管理</a></el-breadcrumb-item>
-                <el-breadcrumb-item><a href="">质检管理</a></el-breadcrumb-item>
-                <el-breadcrumb-item><a href="">订单详情</a></el-breadcrumb-item>
+                <el-breadcrumb-item>订单管理</el-breadcrumb-item>
+                <el-breadcrumb-item>开票管理</el-breadcrumb-item>
+                <el-breadcrumb-item><a href='/'>订单详情</a></el-breadcrumb-item>
             </el-breadcrumb>
             <br />
             <el-row>
-                <b>订单编号:<span>1453154133</span></b>
+                <b>订单编号:<span>{{orderInfo.orderCode}}</span></b>
             </el-row>
             <br />
+            <!-- 订单信息 -->
             <el-row>
-                <el-col :span="6"><b>客户名称：</b><span>申亿五金标准件有限公司</span></el-col>
-                <el-col :span="6" :offset="1"><b>订购产品：</b><span>**螺栓</span></el-col>
+                <el-col :span="6"><b>客户名称：</b><span>{{orderInfo.customerName}}</span></el-col>
+                <el-col :span="6" :offset="1"><b>订购产品：</b><span>{{orderInfo.commodity}}</span></el-col>
                 <el-col :span="3" :offset="1">订单状态</el-col>
                 <el-col :span="3" :offset="1">订单金额</el-col>
             </el-row>
             <el-row>
-                <el-col :span="6"><b>手机号码：</b><span>13531415541</span></el-col>
-                <el-col :span="6" :offset="1"><b>订单日期：</b><span>2021/1/34 18:10:35</span></el-col>
-                <el-col :span="3" :offset="1"><b>已收货</b></el-col>
-                <el-col :span="3" :offset="1"><b>￥<span>234.00</span></b></el-col>
+                <el-col :span="6"><b>手机号码：</b><span>{{orderInfo.phone}}</span></el-col>
+                <el-col :span="6" :offset="1"><b>订单日期：</b><span>{{orderInfo.orderTime}}</span></el-col>
+                <el-col :span="3" :offset="1"><b>{{orderInfo.status}}</b></el-col>
+                <el-col :span="3" :offset="1"><b>￥<span>{{orderInfo.total}}</span></b></el-col>
             </el-row>
         </el-header>
         <el-main>
-            <p><b style='font-size: 16px'>收件人信息</b></p>
+            <!-- 收件信息 -->
+            <el-row>
+                <el-col style='font-size: 16px'><b>收件人信息</b></el-col>
+            </el-row>
             <el-divider></el-divider>  <!-- 分割线-->
             <el-row>
-                <el-col :span="6"><b>收件人：</b>×××</el-col>
+                <el-col :span="6"><b>收件人：</b>{{receiverInfo.receiver}}</el-col>
                 <el-col :span="6"><b>电话号码：</b>123××××1234</el-col>
                 <el-col :span="6"><b>所在地区：</b>××省××市区</el-col>
                 <el-col :span="6"><b>详细地址：</b>××××××</el-col>
             </el-row>
-            <el-row>
-                <el-col :span="6"><b>配送方式：</b><span>货运</span>&nbsp;&nbsp;专线物流自提￥<span>88</span></el-col>
-            </el-row>
             <br />
+            <!-- 配送方式 -->
+            <el-row>
+                <el-col :span='2'>
+                    <b style='font-size: 16px'>配送方式</b>
+                </el-col>
+                <el-col :span='15'>
+                    <span v-bind=distributeType>{{distributeType}}</span>
+                    <span style='margin-left: 15px'>专线物流自提￥88</span>
+                </el-col>
+            </el-row>
+            <!-- 质检报告 -->
+            <br />
+            <!-- 开票信息 -->
             <p><b style='font-size: 16px'>开票信息</b></p>
             <el-divider></el-divider>  <!-- 分割线-->
             <div class='invoiceInfo'>
@@ -65,6 +78,7 @@
                 </el-row>
             </div>
             <br />
+            <!-- 商品信息 -->
             <p><b style='font-size: 16px'>商品信息</b></p>
             <br />
             <div class='productInfo'>
@@ -73,7 +87,7 @@
                 </el-row>
                 <el-row>
                     <el-col :span="4">
-                        <img src='../../../../assets/img/img.jpg' style='width:90px;height: 90px;'/>
+                        <img src='' style='width:90px;height: 90px;' alt='商品图片'/>
                     </el-col>
                     <el-col :span="7" style='margin-top: 30px'>
                         <b>U形螺栓JB/ZQ 1234- -2000 108粗牙/黄锌</b>
@@ -95,7 +109,48 @@
 
 <script>
 export default {
-    name: 'specialOrderDetail'
+    name: 'invoiceDetail',
+    data(){
+        return{
+            distributeType:"货运",   //实际配送方式
+            orderInfo:[{        //订单信息
+                orderCode:131485694523,
+                customerName:"申亿五金标准件有限公司",
+                phone:13345511223,
+                commodity:"**螺栓",
+                orderTime:"2021/02/22 18:30:50",
+                status:"已收货",
+                total:234.00,
+            }],
+            receiverInfo:[{
+                receiver:"曲丽丽",
+                phone:13452163655,
+                district:"湖南长沙",
+                detailDistrict:"雨花区***街道",
+            }],
+            invoiceInfo:[{     //发票基本信息
+                invoiceType:"增值税专用发票",
+                enterpriseName:"审议五金标准件有限公司",
+                taxerCode:"12311455",
+                cellphone:"13452163655",
+                accountBank: "长沙银河天心区**分行",
+                accountNumber: "23512345464512",
+            }],
+            commodityInfo:[{
+                material:"U形螺栓JB/ZQ 1234- -2000 108粗牙/黄锌",
+                materialCode:"82938455",
+                price:"500",
+                quantity:123,
+                transportPrice:10.00,
+                total:234.00,
+                remarks:"备注备注备注备注备注",
+            }]
+
+        }
+    },
+    methods:{
+
+    }
 };
 </script>
 
@@ -103,6 +158,10 @@ export default {
 
 .el-header {
     background-color: white;
+}
+.el-header .el-row{
+    padding-left: 10px;
+    margin-bottom: 5px;
 }
 .el-breadcrumb{
     margin-top: 10px;
@@ -112,19 +171,18 @@ export default {
     background-color: white;
     font-size: 14px;
 }
-/*.el-col{*/
-/*    height: 50px;*/
-/*    line-height: 50px;*/
-/*    border-bottom: 1px solid rgb(240,240,240);*/
-/*}*/
-.el-row{
+.el-main .el-row{
     padding-left: 10px;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
 }
 .invoiceInfo,.productInfo{
     border: 1px solid rgb(220,220,220);
     margin-left: 20px;
     margin-right: 20px;
 }
-
+i{
+    font-size: 20px;
+    color: #2d8cf0;
+    cursor: pointer;
+}
 </style>

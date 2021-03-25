@@ -1,15 +1,8 @@
 <template>
     <el-container>
-        <el-header height='30%'>
-            <el-breadcrumb separator="/">
-                <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                <el-breadcrumb-item><a href='/'>客户管理</a></el-breadcrumb-item>
-                <el-breadcrumb-item><a href='/'>详情</a></el-breadcrumb-item>
-            </el-breadcrumb>
-            <br />
-            <span style='font-size: 18px;font-weight: bold'>详情</span>
-            <br/><br/>
-        </el-header>
+      <el-header height='30%'>
+        <h2>详情</h2>
+      </el-header>
         <el-main>
             <el-row>
                 <el-col :span='5'>

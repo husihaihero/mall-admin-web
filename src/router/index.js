@@ -38,7 +38,7 @@ export const asyncRouterMap = [
   {
     path: '/mallManage/customer',
     component: Layout,
-    redirect: '/mallManage/customer',
+    redirect: '/mallManage/customer/customerList',
     name: 'customer',
     meta: {title: '客户管理', icon: 'product'},
     children: [
@@ -47,19 +47,13 @@ export const asyncRouterMap = [
         name: 'customerList',
         component: () => import('@/views/mallManage/customer/index'),
         meta: {title: '客户列表', icon: 'product-list'}
-      },
-      {
-        path: 'customerDetail',
-        name: 'customerDetail',
-        component: () => import('@/views/mallManage/customer/customerDetail'),
-        meta: {title: '客户详情', icon: 'product-add'}
       }
     ]
   },
   {
     path: '/mallManage/order',
     component: Layout,
-    redirect: '/mallManage/order',
+    redirect: '/mallManage/order/ordinaryOrderList',
     name: 'order',
     meta: {title: '订单管理', icon: 'product'},
     children: [
@@ -70,10 +64,24 @@ export const asyncRouterMap = [
         meta: {title: '普通订单', icon: 'product-list'}
       },
       {
+        path: 'ordinaryOrderDetail',
+        name: 'ordinaryOrderDetail',
+        component: () => import('@/views/mallManage/order/ordinaryOrder/OrdinaryOrderDetail'),
+        meta: {title: '普通订单详情'},
+        hidden:true
+      },
+      {
         path: 'specialOrderList',
         name: 'specialOrderList',
         component: () => import('@/views/mallManage/order/specialOrder/index'),
         meta: {title: '非标订单', icon: 'product-list'}
+      },
+      {
+        path: 'specialOrderDetail',
+        name: 'specialOrderDetail',
+        component: () => import('@/views/mallManage/order/specialOrder/SpecialOrderDetail'),
+        meta: {title: '非标订单详情'},
+        hidden:true
       },
       {
         path: 'payCheck',
@@ -82,10 +90,24 @@ export const asyncRouterMap = [
         meta: {title: '支付审核', icon: 'product-add'}
       },
       {
+        path: 'payCheckOrderDetail',
+        name: 'payCheckOrderDetail',
+        component: () => import('@/views/mallManage/order/payCheck/PayCheckOrderDetail'),
+        meta: {title: '支付审核详情'},
+        hidden:true
+      },
+      {
         path: 'invoiceList',
         name: 'invoiceList',
         component: () => import('@/views/mallManage/order/invoice/index'),
         meta: {title: '开票管理', icon: 'product-add'}
+      },
+      {
+        path: 'invoiceDetail',
+        name: 'invoiceDetail',
+        component: () => import('@/views/mallManage/order/invoice/invoiceDetail'),
+        meta: {title: '开票详情'},
+        hidden:true
       },
       {
         path: 'qualityTestingList',

@@ -1,188 +1,187 @@
 <template>
-    <el-container>
-        <el-header height='30%'>
-            <el-breadcrumb separator="/">
-                <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                <el-breadcrumb-item>订单管理</el-breadcrumb-item>
-                <el-breadcrumb-item>开票管理</el-breadcrumb-item>
-                <el-breadcrumb-item><a href='/'>订单详情</a></el-breadcrumb-item>
-            </el-breadcrumb>
-            <br />
-            <el-row>
-                <b>订单编号:<span>{{orderInfo.orderCode}}</span></b>
-            </el-row>
-            <br />
-            <!-- 订单信息 -->
-            <el-row>
-                <el-col :span="6"><b>客户名称：</b><span>{{orderInfo.customerName}}</span></el-col>
-                <el-col :span="6" :offset="1"><b>订购产品：</b><span>{{orderInfo.commodity}}</span></el-col>
-                <el-col :span="3" :offset="1">订单状态</el-col>
-                <el-col :span="3" :offset="1">订单金额</el-col>
-            </el-row>
-            <el-row>
-                <el-col :span="6"><b>手机号码：</b><span>{{orderInfo.phone}}</span></el-col>
-                <el-col :span="6" :offset="1"><b>订单日期：</b><span>{{orderInfo.orderTime}}</span></el-col>
-                <el-col :span="3" :offset="1"><b>{{orderInfo.status}}</b></el-col>
-                <el-col :span="3" :offset="1"><b>￥<span>{{orderInfo.total}}</span></b></el-col>
-            </el-row>
-        </el-header>
-        <el-main>
-            <!-- 收件信息 -->
-            <el-row>
-                <el-col style='font-size: 16px'><b>收件人信息</b></el-col>
-            </el-row>
-            <el-divider></el-divider>  <!-- 分割线-->
-            <el-row>
-                <el-col :span="6"><b>收件人：</b>{{receiverInfo.receiver}}</el-col>
-                <el-col :span="6"><b>电话号码：</b>123××××1234</el-col>
-                <el-col :span="6"><b>所在地区：</b>××省××市区</el-col>
-                <el-col :span="6"><b>详细地址：</b>××××××</el-col>
-            </el-row>
-            <br />
-            <!-- 配送方式 -->
-            <el-row>
-                <el-col :span='2'>
-                    <b style='font-size: 16px'>配送方式</b>
-                </el-col>
-                <el-col :span='15'>
-                    <span v-bind=distributeType>{{distributeType}}</span>
-                    <span style='margin-left: 15px'>专线物流自提￥88</span>
-                </el-col>
-            </el-row>
-            <!-- 质检报告 -->
-            <br />
-            <!-- 开票信息 -->
-            <p><b style='font-size: 16px'>开票信息</b></p>
-            <el-divider></el-divider>  <!-- 分割线-->
-            <div class='invoiceInfo'>
-                <el-row style='background-color:rgb(245,245,245);border-bottom: 1px solid rgb(220,220,220)'>
-                    <b style='font-size: 16px;height: 40px;line-height: 40px;'>基本信息</b>
-                </el-row>
-                <el-row>
-                    <b>发票类型：<span style='color: #2d8cf0'>增值税发票</span></b>
-                </el-row>
-                <el-row>
-                    <el-col :span="8"><b>公司名称：</b>×××</el-col>
-                    <el-col :span="8"><b>纳税人号：</b>222××××××</el-col>
-                    <el-col :span="8"><b>手机号码：</b>123××××1234</el-col>
-                </el-row>
-                <el-divider></el-divider>
-                <el-row>
-                    <b style='font-size: 16px'>寄送地址:</b>
-                </el-row>
-                <el-row>
-                    <el-col :span="6"><b>收件人：</b>×××</el-col>
-                    <el-col :span="6"><b>电话号码：</b>123××××1234</el-col>
-                    <el-col :span="6"><b>所在地区：</b>××省××市区</el-col>
-                    <el-col :span="6"><b>详细地址：</b>××××××</el-col>
-                </el-row>
-            </div>
-            <br />
-            <!-- 商品信息 -->
-            <p><b style='font-size: 16px'>商品信息</b></p>
-            <br />
-            <div class='productInfo'>
-                <el-row style='background-color:rgb(245,245,245);border-bottom: 1px solid rgb(220,220,220)'>
-                    <b style='font-size: 16px;height: 40px;line-height: 40px;'>备注：</b><span>备注内容备注内容备注内容</span>
-                </el-row>
-                <el-row>
-                    <el-col :span="4">
-                        <img src='' style='width:90px;height: 90px;' alt='商品图片'/>
-                    </el-col>
-                    <el-col :span="7" style='margin-top: 30px'>
-                        <b>U形螺栓JB/ZQ 1234- -2000 108粗牙/黄锌</b>
-                        <br>
-                        <b>物料编号：</b><span>892452</span>
-                    </el-col>
-                    <el-col :span="4" style='margin-top: 40px'>×××/千支</el-col>
-                    <el-col :span="4" style='margin-top: 40px'>××××千支</el-col>
-                    <el-col :span="5" style='margin-top: 30px'>
-                        <b>总金额</b><span></span>
-                        <br>
-                        含运费<span>10.00</span>
-                    </el-col>
-                </el-row>
-            </div>
-        </el-main>
-    </el-container>
+  <el-container>
+    <el-header height='30%'>
+      <h2>开票管理</h2>
+      <el-row style='width:100%;text-align: center;padding:5px'>
+        <el-input style='width: 500px;'
+                  size='1'
+                  placeholder='请输入关键字搜索'
+        >
+        </el-input>
+        <el-button type='primary' size='1'>搜索</el-button>
+      </el-row>
+      <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleClick">
+        <el-menu-item index="total">全部</el-menu-item>
+        <el-menu-item index="applied">已申请</el-menu-item>
+        <el-menu-item index="notInvoiced">未开票</el-menu-item>
+        <el-menu-item index="invoiced">已开票</el-menu-item>
+      </el-menu>
+    </el-header>
+    <div class="table-container">
+      <el-table ref="orderTable"
+                :data="allUserList"
+                style="width: 100%;"
+                v-loading="listLoading" border>
+        <el-table-column label="序号" width="80" align="center">
+          <template slot-scope="scope">{{scope.row.id}}</template>
+        </el-table-column>
+        <el-table-column label="用户名称" align="center">
+          <template slot-scope="scope">{{scope.row.username}}</template>
+        </el-table-column>
+        <el-table-column label="订单详情" width="120" align="center">
+          <template slot-scope="scope">
+          <a style="color: #2d8cf0"
+             size="mini"
+             @click="handleViewOrder(scope.$index, scope.row)"
+          >查看详情</a>
+          </template>
+        </el-table-column>
+        <el-table-column label="开票状态" width="120" align="center">
+          <template slot-scope="scope">{{scope.row.phone}}</template>
+        </el-table-column>
+        <el-table-column label="操作" width="160" align="left">
+          <template slot-scope="scope">
+            <a style="color: #2d8cf0"
+               size="mini"
+               @click="handleBilling(scope.$index, scope.row)"
+            >开票</a>
+            &nbsp;&nbsp;
+            <a style="color: #2d8cf0"
+               size="mini"
+               @click="handleSetLogistics(scope.$index, scope.row)"
+            >设置物流</a>
+          </template>
+        </el-table-column>
+      </el-table>
+      <!--        分页      -->
+      <el-pagination
+        background
+        style='float: right;'
+        layout="prev, pager, next"
+        :total="100">
+      </el-pagination>
+    </div>
+    <!--        设置付款弹出层-->
+    <el-dialog
+      title="开票"
+      :visible.sync="dialogVisible" width="30%">
+      <el-form :model="billing"
+               ref="billingForm" label-width="100px">
+        <el-form-item label="发票类型：">
+          <span style="color: #1e6abc;">{{billing.type}}</span>
+        </el-form-item>
+        <el-form-item label="公司名称：">
+          <span style="font-weight:bold">{{billing.name}}</span>
+        </el-form-item>
+        <el-form-item label="纳税人号：">
+          <span style="font-weight:bold">{{billing.id}}</span>
+        </el-form-item>
+        <el-form-item label="手机号码：">
+          <span style="font-weight:bold">{{billing.phone}}</span>
+        </el-form-item>
+        <el-form-item label="寄送地址：">
+          <span style="font-weight:bold">{{billing.address}}</span>
+        </el-form-item>
+        <el-form-item label="物流单号：">
+          <el-input v-model="billing.deliverySn" class="input-width"></el-input>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="handleConfirm">确 定</el-button>
+      </span>
+    </el-dialog>
+  </el-container>
 </template>
 
 <script>
 export default {
-    name: 'invoiceList',
-    data(){
-        return{
-            distributeType:"货运",   //实际配送方式
-            orderInfo:[{        //订单信息
-                orderCode:131485694523,
-                customerName:"申亿五金标准件有限公司",
-                phone:13345511223,
-                commodity:"**螺栓",
-                orderTime:"2021/02/22 18:30:50",
-                status:"已收货",
-                total:234.00,
-            }],
-            receiverInfo:[{
-                receiver:"曲丽丽",
-                phone:13452163655,
-                district:"湖南长沙",
-                detailDistrict:"雨花区***街道",
-            }],
-            invoiceInfo:[{     //发票基本信息
-                invoiceType:"增值税专用发票",
-                enterpriseName:"审议五金标准件有限公司",
-                taxerCode:"12311455",
-                cellphone:"13452163655",
-                accountBank: "长沙银河天心区**分行",
-                accountNumber: "23512345464512",
-            }],
-            commodityInfo:[{
-                material:"U形螺栓JB/ZQ 1234- -2000 108粗牙/黄锌",
-                materialCode:"82938455",
-                price:"500",
-                quantity:123,
-                transportPrice:10.00,
-                total:234.00,
-                remarks:"备注备注备注备注备注",
-            }]
-
+  name: 'invoiceList',
+  data() {
+    return {
+      activeIndex: 'invoiced',
+      listLoading: false,
+      isShow:true,
+      payTypeList:["按期付款"],  //选择支付方式
+      dialogVisible:false,
+      billing:{
+        type:"增值税普通发票",
+        name:"申亿五金标准件有限公司",
+        id:"12312312313",
+        phone:"18292001029",
+        address:"张三 18292001029 湖南省长沙市天心区",
+        deliverySn:""
+      },
+      allUserList:[       //所有用户
+        {
+          id:1,
+          username:"个人客户",
+          status:0,
+          userType:"个人认证",
+          phone:12345546,
+          agent:'无',
+        },
+        {
+          id:2,
+          username:"待审核客户",
+          status:2,
+          userType:"待审核",
+          phone:1555231,
+          agent:'无',
+        },
+        {
+          id:3,
+          username:"企业客户",
+          status:1,
+          userType:"企业认证",
+          phone:133331,
+          agent:'代理人',
+        },
+        {
+          id:1,
+          username:"审核未通过客户",
+          status:3,
+          userType:"个人认证",
+          phone:12345546,
+          agent:'无',
         }
+      ],
+    };
+  },
+  methods: {
+    handleViewOrder(index, row){
+      this.$router.push({path:'/mallManage/order/invoiceDetail',query:{id:row.id}})
     },
-    methods:{
+    handleBilling(index, row){
+      this.dialogVisible = true;
+    },
+    handleSetLogistics(index, row){
+      this.dialogVisible = true;
+    },
+    handleConfirm(){
+      this.dialogVisible = false;
+    },
+    handleClick(tab, event) {
+      console.log(tab, event);
+    },
+  }
 
-    }
-};
+}
 </script>
-
 <style scoped>
-
-.el-header {
-    background-color: white;
+.customerType .el-col{
+  cursor: pointer;    /*放上去边手型*/
 }
-.el-header .el-row{
-    padding-left: 10px;
-    margin-bottom: 5px;
+.customerType .colActive{
+  border-bottom: 2px solid #2d8cf0;
+  color: #2d8cf0;
 }
-.el-breadcrumb{
-    margin-top: 10px;
+.el-dialog__wrapper >>> .el-dialog__header{
+  border-bottom: 1px solid #e8eaec;
+  font-size: 16px;
+  font-weight: bold;
 }
-.el-main{
-    margin: 15px;
-    background-color: white;
-    font-size: 14px;
-}
-.el-main .el-row{
-    padding-left: 10px;
-    margin-bottom: 15px;
-}
-.invoiceInfo,.productInfo{
-    border: 1px solid rgb(220,220,220);
-    margin-left: 20px;
-    margin-right: 20px;
-}
-i{
-    font-size: 20px;
-    color: #2d8cf0;
-    cursor: pointer;
+.el-dialog__wrapper >>> .el-dialog__body{
+  padding: 20px;
 }
 </style>
